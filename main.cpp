@@ -3,6 +3,44 @@
 #include <ctime>
 using namespace std;
 
+void matrix_symme(double **arr, int n){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if(i==j){
+                *(*(arr+i)+j)=0;
+            }
+            else{
+                double r=rand()%(1500-100+1)+100;//siempre sale entero
+                *(*(arr+i)+j)=r;
+                *(*(arr+j)+i)=r;
+            }
+        }
+    }
+}
+
+void show_matrix(double **arr, int n){
+    for (int i = 0; i < n; i++)
+    {
+        cout << "aero " << i+1 << "\t";
+        for (int j = 0; j < n; j++)
+        {
+            cout << *(*(arr+i)+j) << "\t";
+        }
+        cout << endl;
+    }
+}
+
+double prom_dist(double **arr, int n, int c){
+    double sum=0;
+    for (int i = 0; i < n; i++)
+    {
+        sum+=*(*(arr+c)+i);
+    }
+    return sum/(n-1);
+}
+
 int main(){
     srand(time(NULL));
     int n;
@@ -14,35 +52,27 @@ int main(){
         *(aero+i)=new double[n];
     }
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if(i==j){
-                *(*(aero+i)+j)=0;
-            }
-            else{
-                double r=rand()%(1500-100+1)+100;
-                *(*(aero+i)+j)=r;
-                *(*(aero+j)+i)=r;
-            }
-        }
-    }
+    matrix_symme(aero,n);
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            cout << *(*(aero+i)+j) << "\t";
-        }
-        cout << endl;
+        cout << "aero " << i+1 << "\t";
     }
+    cout << endl;
+
+    show_matrix(aero,n);
+
+    double *prom= new double[n];
+    for (int i = 0; i < n; i++){
+        *(prom+i)=prom_dist(aero,n,i);
+        cout << "promedio de distancias del aeropuerto " << i+1 << ": " << *(prom+i)<< endl; //talvez lo deje
+    }
+
+    delete[] prom;
+    for (int i = 0; i < n; i++){
+        delete[] *(aero+i);
+    }
+    delete[] aero;
 
     return 0;
 }
-
-//readme: debo crear el repositorio local y luego subirlo a github
-
-
-// Repository URL:
-//https://github.com/FCCSprogramming/distanciasaeropuertos-Tchqla.git
