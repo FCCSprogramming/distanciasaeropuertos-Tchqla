@@ -5,7 +5,6 @@
 using namespace std;
 
 int main(){
-    srand(time(NULL));
     int n;
     cout << "indique la cantidad de aeropuertos: ";
     cin >> n;

@@ -1,10 +1,10 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ctime>
-#include "funciones.h"
 using namespace std;
 
 void matrix_symme(double **arr, int n){
+    srand(time(NULL));
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
